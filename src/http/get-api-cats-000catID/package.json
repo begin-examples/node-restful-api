@@ -1,0 +1,7 @@
+{
+  "name": "begin-app-get-api-cats",
+  "dependencies": {
+    "@architect/functions": "latest",
+    "@begin/data": "latest"
+  }
+}

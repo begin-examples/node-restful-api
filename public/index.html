@@ -1,0 +1,51 @@
+<!-- look a single file component! -->
+<style>
+  main {
+    background:grey;
+  }
+</style>
+
+<form action=/api/cats method=post>
+  <input type=text name=name placeholder="cat name">
+  <select name=breed>
+    <option value=tabby>tabby</option>
+    <option value=black>black</option>
+  </select>
+  <button type=submit>save cat</button>
+</form>
+
+<main>Loading cats...</main>
+
+<script type=module>
+import cats from '/cats.js'
+import cat from '/cat.js'
+
+// bind form
+let form = document.querySelector('form')
+form.onsubmit = async function submit(e) {
+  e.preventDefault()
+  let name = form.querySelector('input').value
+  let breed = form.querySelector('select').value
+  // create the cat
+  await cats.create({name, breed})
+  // reset the list
+  await main()
+}
+
+// render main
+async function main() {
+  let main = document.querySelector('main')
+  let json = await cats.read()
+  let html = json.map(cat).join('')
+  main.innerHTML = html
+  document.querySelectorAll('button[data-action=destroy]').forEach(n=> {
+    n.onsubmit = async function destroy(e) {
+      e.preventDefault()
+      let catID = e.target.dataset.key
+      await cats.destroy(catID)
+    }
+  })
+}
+
+main()
+</script>
