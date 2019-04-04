@@ -25,4 +25,3 @@ function isXHR(headers) {
     return headers['x-requested-with'] === 'XMLHttpRequest'
   return false
 }
-

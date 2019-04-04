@@ -1,11 +1,11 @@
 let data = require('@begin/data')
 
-exports.handler = async function getCats() {
-  let cats = await data.get({table:'cats'})
+exports.handler = async function getCats(req) {
+  await data.set({
+    table: 'cats',
+    ...req.body, 
+  })
   return {
-    body: JSON.stringify(cats)
+    statusCode: 201
   }
 }
-
-
-

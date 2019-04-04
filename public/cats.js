@@ -4,6 +4,7 @@ let headers = {
 }
 
 async function create(cat) {
+  console.log('create', cat)
   await fetch('/api/cats', {
     method: 'post',
     body: JSON.stringify(cat),
@@ -12,12 +13,14 @@ async function create(cat) {
 }
 
 async function read(catID) {
-  let url = `/api/cats${catID? '/'+catID : ''}`
+  console.log('read', catID)
+  let url = catID? `/api/cats/${catID}` : '/api/cats'
   let result = await fetch(url)
   return await result.json()
 }
 
-async function update(cat.key) {
+async function update(cat) {
+  console.log('update', cat)
   await fetch(`/api/cats/${cat.key}`, {
     method: 'patch',
     body: JSON.stringify(cat),
@@ -26,6 +29,7 @@ async function update(cat.key) {
 }
 
 async function destroy(catID) {
+  console.log('destroy', catID)
   await fetch(`/api/cats/${catID}`, {
     method: 'delete',
     headers 

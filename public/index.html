@@ -34,18 +34,24 @@ form.onsubmit = async function submit(e) {
 
 // render main
 async function main() {
+  // render list
   let main = document.querySelector('main')
   let json = await cats.read()
   let html = json.map(cat).join('')
   main.innerHTML = html
+  // bind events
   document.querySelectorAll('button[data-action=destroy]').forEach(n=> {
-    n.onsubmit = async function destroy(e) {
+    n.onclick = async function destroy(e) {
       e.preventDefault()
       let catID = e.target.dataset.key
+      e.target.parentNode.remove() 
       await cats.destroy(catID)
     }
   })
 }
 
-main()
+// this is why ppl want top level await
+;(async function() {
+  await main()
+})()
 </script>
