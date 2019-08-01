@@ -4,10 +4,14 @@
 # This is a generated file and will be overwritten
 #
 @app
-begin-app
+resty
 
+@aws
+bucket cf-sam-deployments-east
+
+@cdn
+@static
 @http
-get /
 get /api/cats
 get /api/cats/:catID
 post /api/cats
