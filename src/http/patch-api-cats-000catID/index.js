@@ -1,6 +1,9 @@
 let data = require('@begin/data')
+let arc = require('@architect/functions')
 
-exports.handler = async function getCats(req) {
+exports.handler = arc.http.async(update)
+
+async function update(req) {
   await data.set({
     table: 'cats',
     ...req.body,

@@ -1,6 +1,9 @@
 let data = require('@begin/data')
+let arc = require('@architect/functions')
 
-exports.handler = async function destroy(req) {
+exports.handler = arc.http.async(destroy)
+
+async function destroy(req) {
   await data.destroy({
     table: 'cats',
     key: req.params.catID

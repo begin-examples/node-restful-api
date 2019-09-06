@@ -1,6 +1,9 @@
 let data = require('@begin/data')
+let arc = require('@architect/functions')
 
-exports.handler = async function getCats(req) {
+exports.handler = arc.http.async(getCat)
+
+async function getCat(req) {
   let cat = await data.get({
     table: 'cats',
     key: req.params.catID
