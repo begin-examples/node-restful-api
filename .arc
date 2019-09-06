@@ -6,8 +6,11 @@
 @app
 begin-app
 
+@aws
+bucket cf-sam-deployments-east
+
+@static
 @http
-get /
 get /api/cats
 get /api/cats/:catID
 post /api/cats
